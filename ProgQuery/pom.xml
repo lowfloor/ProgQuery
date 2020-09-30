@@ -15,9 +15,9 @@
 
 	<dependencies>
 		<dependency>
-		    <groupId>com.sun</groupId>
-		    <artifactId>tools</artifactId>
-		    <version>8</version>
+			<groupId>com.sun</groupId>
+			<artifactId>tools</artifactId>
+			<version>8</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/resources/libs/tools.jar</systemPath>
 		</dependency>
@@ -59,13 +59,22 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>fully.qualified.MainClass</mainClass>
+							<mainClass>es.uniovi.reflection.progquery.ProgQueryPlugin</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase> 
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
