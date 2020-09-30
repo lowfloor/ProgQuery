@@ -2,11 +2,11 @@ package es.uniovi.reflection.progquery.database.insertion.lazy;
 
 import java.util.Map.Entry;
 
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Session;
-import org.neo4j.driver.v1.Transaction;
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Session;
+import org.neo4j.driver.Transaction;
 import org.neo4j.graphdb.Label;
 
 import es.uniovi.reflection.progquery.node_wrappers.NodeWrapper;
@@ -22,8 +22,7 @@ public class LazyInsertionManager {
 		Transaction t = session.beginTransaction();
 
 		storeNodes(t, info);
-		t.success();
-		t.commitAsync(); 
+		t.commit();
 		session.close();
 	}
 

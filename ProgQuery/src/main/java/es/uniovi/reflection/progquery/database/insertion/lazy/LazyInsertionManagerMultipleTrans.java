@@ -1,18 +1,18 @@
 package es.uniovi.reflection.progquery.database.insertion.lazy;
 
-import static org.neo4j.driver.v1.Values.parameters;
+import static org.neo4j.driver.Values.parameters;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Session;
-import org.neo4j.driver.v1.StatementResult;
-import org.neo4j.driver.v1.Transaction;
-import org.neo4j.driver.v1.TransactionWork;
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Result;
+import org.neo4j.driver.Session;
+import org.neo4j.driver.Transaction;
+import org.neo4j.driver.TransactionWork;
 
 import es.uniovi.reflection.progquery.node_wrappers.NodeWrapper;
 import es.uniovi.reflection.progquery.utils.dataTransferClasses.Pair;
@@ -80,14 +80,14 @@ public class LazyInsertionManagerMultipleTrans {
 	 * }); }
 	 */
 
-	private static <T> T executeQuery(String query, Session session, Function<StatementResult, T> resultF) {
+	private static <T> T executeQuery(String query, Session session, Function<Result, T> resultF) {
 		return session.writeTransaction(new TransactionWork<T>() {
 
 			@Override
 			public T execute(Transaction tx) {
 				// tx.
 
-				StatementResult result = tx.run(query);
+				Result result = tx.run(query);
 				// result.list().get(0).asMap().entrySet()
 				// .forEach(e -> System.out.println(e.getKey() + "," +
 				// e.getValue()));
@@ -119,7 +119,7 @@ public class LazyInsertionManagerMultipleTrans {
 	// }
 
 	private static Void executeNodesQuery(Session session, List<NodeWrapper> nodes,
-			List<Pair<String, Object[]>> nodeQueries, Function<StatementResult, Long> resultF, int start, int end) {
+			List<Pair<String, Object[]>> nodeQueries, Function<Result, Long> resultF, int start, int end) {
 		return session.writeTransaction(new TransactionWork<Void>() {
 
 			@Override
