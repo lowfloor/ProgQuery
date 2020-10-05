@@ -18,6 +18,7 @@ ProgQuery/compilePlugin.bat
 ProgQuery/compileAndExecuteWithArgs.bat
 ProgQuery/executePlugin--.bat
 ProgQuery/loadExecuteAndView.bat
+ProgQuery/.metadata/*
 *.pyc
 *.py
 *.csv
@@ -28,4 +29,7 @@ ProgQuery/loadExecuteAndView.bat
 *.gexf
 binaries_bad/*
 __pycache__/*
+ProgQuery/javac.*.args
+ProgQuery/.settings/
+
 ProgQuery/target/
