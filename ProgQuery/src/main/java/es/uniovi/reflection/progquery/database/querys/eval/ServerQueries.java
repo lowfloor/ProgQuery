@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.neo4j.driver.v1.Record;
+import org.neo4j.driver.Record;
 
 import es.uniovi.reflection.progquery.database.querys.ServerQueryManager;
 import es.uniovi.reflection.progquery.evaluation.Rule;

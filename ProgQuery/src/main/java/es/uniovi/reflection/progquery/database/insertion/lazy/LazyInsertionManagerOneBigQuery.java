@@ -2,13 +2,13 @@ package es.uniovi.reflection.progquery.database.insertion.lazy;
 
 import java.util.Map.Entry;
 
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Session;
-import org.neo4j.driver.v1.StatementResult;
-import org.neo4j.driver.v1.Transaction;
-import org.neo4j.driver.v1.TransactionWork;
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Result;
+import org.neo4j.driver.Session;
+import org.neo4j.driver.Transaction;
+import org.neo4j.driver.TransactionWork;
 import org.neo4j.graphdb.Label;
 
 import es.uniovi.reflection.progquery.node_wrappers.NodeWrapper;
@@ -34,7 +34,7 @@ public class LazyInsertionManagerOneBigQuery {
 				public Long execute(Transaction tx) {
 					// tx.
 
-					StatementResult result = tx.run(createQueryFor(n));
+					Result result = tx.run(createQueryFor(n));
 					// result.list().get(0).asMap().entrySet()
 					// .forEach(e -> System.out.println(e.getKey() + "," +
 					// e.getValue()));

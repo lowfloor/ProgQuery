@@ -296,7 +296,8 @@ public class QueriesWithProcedures {
 			// embeddedDriver.getGraphDatabaseService();
 			for (Class c : new Class[] { EnclosingStmt.class, AnySucc.class })
 				((GraphDatabaseAPI) gs).getDependencyResolver()
-						.resolveDependency(Procedures.class, DependencyResolver.SelectionStrategy.FIRST)
+						// RAUL .resolveDependency(Procedures.class, DependencyResolver.SelectionStrategy.FIRST)
+				.resolveDependency(Procedures.class)
 						.registerFunction(c);
 			// ((GraphDatabaseAPI)
 			// gs).getDependencyResolver().resolveDependency(Join.class,null).register(Join.class);
