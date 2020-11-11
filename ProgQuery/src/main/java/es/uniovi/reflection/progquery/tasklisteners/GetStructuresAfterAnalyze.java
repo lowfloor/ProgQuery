@@ -17,6 +17,7 @@ import com.sun.tools.javac.tree.JCTree.JCCompilationUnit;
 import es.uniovi.reflection.progquery.ast.ASTAuxiliarStorage;
 import es.uniovi.reflection.progquery.cache.DefinitionCache;
 import es.uniovi.reflection.progquery.database.DatabaseFachade;
+import es.uniovi.reflection.progquery.database.insertion.lazy.InfoToInsert;
 import es.uniovi.reflection.progquery.database.nodes.NodeTypes;
 import es.uniovi.reflection.progquery.database.relations.CDGRelationTypes;
 import es.uniovi.reflection.progquery.database.relations.PartialRelation;
@@ -50,8 +51,10 @@ public class GetStructuresAfterAnalyze implements TaskListener {
 		this.task = task;
 		// this.graphDb = graphDb;
 		DatabaseFachade.CURRENT_INSERTION_STRATEGY.startAnalysis();
+		System.out.println("Se crea node program");
 		PackageInfo.createCurrentProgram(programID);
-
+		if(InfoToInsert.INFO_TO_INSERT.hasNodeWithLabel(NodeTypes.PROGRAM))
+			System.out.println("Pues seh");
 	}
 
 	@Override

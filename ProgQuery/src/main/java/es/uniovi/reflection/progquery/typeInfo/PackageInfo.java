@@ -18,6 +18,7 @@ public class PackageInfo {
 	private static NodeWrapper currentProgram;
 
 	public static void createCurrentProgram(String id) {
+		System.out.println("[createCurrentProgram] id:" + id);
 		currentProgram = DatabaseFachade.CURRENT_DB_FACHADE.createNodeWithoutExplicitTree(NodeTypes.PROGRAM);
 		currentProgram.setProperty("ID", id);
 		// SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at'

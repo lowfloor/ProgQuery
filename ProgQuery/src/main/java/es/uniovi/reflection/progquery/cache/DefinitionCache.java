@@ -9,6 +9,7 @@ import javax.lang.model.type.TypeMirror;
 import com.sun.tools.javac.code.Symbol;
 
 import es.uniovi.reflection.progquery.ast.ASTAuxiliarStorage;
+import es.uniovi.reflection.progquery.database.nodes.NodeTypes;
 import es.uniovi.reflection.progquery.database.querys.cypherWrapper.EdgeDirection;
 import es.uniovi.reflection.progquery.database.relations.CDGRelationTypes;
 import es.uniovi.reflection.progquery.database.relations.RelationTypes;

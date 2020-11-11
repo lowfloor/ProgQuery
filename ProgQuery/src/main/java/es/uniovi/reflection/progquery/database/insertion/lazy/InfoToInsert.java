@@ -3,10 +3,12 @@ package es.uniovi.reflection.progquery.database.insertion.lazy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.Set;
 
 import org.neo4j.graphdb.Label;
 
+import es.uniovi.reflection.progquery.database.nodes.NodeTypes;
 import es.uniovi.reflection.progquery.node_wrappers.Neo4jLazyServerDriverNode;
 import es.uniovi.reflection.progquery.node_wrappers.Neo4jLazyServerDriverRelationship;
 import es.uniovi.reflection.progquery.node_wrappers.NodeWrapper;
@@ -22,10 +24,16 @@ public class InfoToInsert {
 	public static final InfoToInsert INFO_TO_INSERT = new InfoToInsert();
 
 	public void addNewNode(Neo4jLazyServerDriverNode newNode) {
+		System.out.println("AÑADIENDO NODO " + String.join(" ", newNode.getLabels().stream().map(item -> item.toString()).collect(Collectors.toSet())));
+		if(newNode.hasLabel(NodeTypes.PROGRAM))
+			System.out.println("Añadiendo PROGRAM");
 		nodeSet.add(newNode);
 	}
 
 	public void deleteNode(Neo4jLazyServerDriverNode node) {
+		System.out.println("ELIMINANDO NODO " + String.join(" ", node.getLabels().stream().map(item -> item.toString()).collect(Collectors.toSet())));
+		if(node.hasLabel(NodeTypes.PROGRAM))
+			System.out.println("Eliminando PROGRAM");
 		nodeSet.remove(node);
 	}
 
@@ -52,6 +60,14 @@ public class InfoToInsert {
 			relQueries.add(createParameterizedQueryFor(r));
 		return relQueries;
 	}
+	
+	public boolean hasNodeWithLabel(NodeTypes type) {
+		return this.nodeSet.stream()
+				.filter((item) -> {
+					return item.hasLabel(type);
+				}).findAny().isPresent();
+	}
+	
 	private static Pair<String, Object[]> createParameterizedQueryFor(RelationshipWrapper r) {
 		Pair<String, Object[]> props = getParameterizedProps(r.getAllProperties());
 		Object[] propArray = new Object[4 + props.getSecond().length];

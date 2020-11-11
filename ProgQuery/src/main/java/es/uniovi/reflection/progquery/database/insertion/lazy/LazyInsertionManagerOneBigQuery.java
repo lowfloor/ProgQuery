@@ -27,6 +27,7 @@ public class LazyInsertionManagerOneBigQuery {
 	}
 
 	private static void storeNodes(Session session, InfoToInsert info) {
+		
 		for (NodeWrapper n : info.nodeSet)
 			session.writeTransaction(new TransactionWork<Long>() {
 

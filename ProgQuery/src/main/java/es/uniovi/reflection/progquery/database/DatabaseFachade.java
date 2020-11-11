@@ -36,7 +36,7 @@ public class DatabaseFachade {
 	}
 
 	public NodeWrapper createNodeWithoutExplicitTree(NodeTypes type) {
-		return createNode(type, new Object[] {});
+		return createNode(type, new Object[0]);
 	}
 
 	private NodeWrapper createNode(NodeTypes type, Object[] properties) {

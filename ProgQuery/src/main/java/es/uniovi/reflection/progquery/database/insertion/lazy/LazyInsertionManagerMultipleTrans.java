@@ -2,9 +2,13 @@ package es.uniovi.reflection.progquery.database.insertion.lazy;
 
 import static org.neo4j.driver.v1.Values.parameters;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
@@ -14,6 +18,7 @@ import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Transaction;
 import org.neo4j.driver.v1.TransactionWork;
 
+import es.uniovi.reflection.progquery.database.nodes.NodeTypes;
 import es.uniovi.reflection.progquery.node_wrappers.NodeWrapper;
 import es.uniovi.reflection.progquery.utils.dataTransferClasses.Pair;
 
@@ -23,9 +28,22 @@ public class LazyInsertionManagerMultipleTrans {
 	public static void insertIntoNeo4jServerByDriver(InfoToInsert info, final String SERVER_ADDRESS, final String USER,
 			final String PASS, final int MAX_NODES_PER_TRANSACTION) {
 
+		if(info.hasNodeWithLabel(NodeTypes.PROGRAM))
+			System.out.println("Existe un nodo de tipo program");
+		else
+			System.out.println("No Existe un nodo de tipo program");
+		
+		
 		try (final Driver driver = GraphDatabase.driver(SERVER_ADDRESS, AuthTokens.basic(USER, PASS));
 				Session session = driver.session()) {
-
+			
+			info.nodeSet.stream()
+			.forEach((item) -> {
+				String labels = String.join(" ", item.getLabels().stream().map(label -> label.toString()).collect(Collectors.toSet()));
+				System.out.println(labels);
+			});
+			
+			
 			final List<Pair<String, Object[]>> nodeInfo = info.getNodeQueriesInfo();
 			// System.out.println("AFTER ANALYSIS " + nodeInfo.size() + " nodes
 			// ");
@@ -128,6 +146,10 @@ public class LazyInsertionManagerMultipleTrans {
 				// tx.
 				for (int i = start; i < end; i++) {
 					NodeWrapper n = nodes.get(i);
+					
+					if(n.hasLabel(NodeTypes.PROGRAM))
+						System.out.println("Lanzado Query con label Program");
+					
 					Pair<String, Object[]> queryAndParams = nodeQueries.get(i);
 					n.setId(resultF.apply(tx.run(queryAndParams.getFirst(), parameters(queryAndParams.getSecond()))));
 				}

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.neo4j.graphdb.Label;
 
@@ -28,7 +29,6 @@ public class Neo4jLazyServerDriverNode extends AbstractNeo4jLazyServerDriverElem
 	}
 
 	public Neo4jLazyServerDriverNode(NodeTypes... labels) {
-
 		this();
 		for (NodeTypes label : labels)
 			this.labels.add(label);
@@ -38,6 +38,8 @@ public class Neo4jLazyServerDriverNode extends AbstractNeo4jLazyServerDriverElem
 	public Neo4jLazyServerDriverNode(NodeTypes label, Object... props) {
 		this(props);
 		this.labels.add(label);
+		if(NodeTypes.PROGRAM.equals(label))
+			System.out.println("SE ESTA CREANDO EL NODO PROGRAM");
 
 	}
 
