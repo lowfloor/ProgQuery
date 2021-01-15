@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.uniovi.reflection</groupId>
 	<artifactId>progquery</artifactId>
-	<version>1.5.1</version>
+	<version>1.1.6</version>
 	<name>ProgQuery</name>
 	<description>ProgQuery is a system to extract useful syntactic and semantic information from source code programs and store it in a graph database for posterior querying.</description>
 
