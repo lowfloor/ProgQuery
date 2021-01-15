@@ -24,16 +24,13 @@ public class InfoToInsert {
 	public static final InfoToInsert INFO_TO_INSERT = new InfoToInsert();
 
 	public void addNewNode(Neo4jLazyServerDriverNode newNode) {
-		System.out.println("AÑADIENDO NODO " + String.join(" ", newNode.getLabels().stream().map(item -> item.toString()).collect(Collectors.toSet())));
 		if(newNode.hasLabel(NodeTypes.PROGRAM))
 			System.out.println("Añadiendo PROGRAM");
+		
 		nodeSet.add(newNode);
 	}
 
 	public void deleteNode(Neo4jLazyServerDriverNode node) {
-		System.out.println("ELIMINANDO NODO " + String.join(" ", node.getLabels().stream().map(item -> item.toString()).collect(Collectors.toSet())));
-		if(node.hasLabel(NodeTypes.PROGRAM))
-			System.out.println("Eliminando PROGRAM");
 		nodeSet.remove(node);
 	}
 

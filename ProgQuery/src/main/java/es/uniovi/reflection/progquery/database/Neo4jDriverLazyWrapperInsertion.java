@@ -8,7 +8,7 @@ import es.uniovi.reflection.progquery.node_wrappers.NodeWrapper;
 
 public class Neo4jDriverLazyWrapperInsertion implements InsertionStrategy {
 	private final int MAX_NODES_PER_TRANSACTION;
-	private final String ADDRESS, USER, PASS;
+	private final String ADDRESS, USER, PASS, DATABASE;
 
 	private static final int DEFAULT_MAX = 80_000;
 
@@ -28,6 +28,7 @@ public class Neo4jDriverLazyWrapperInsertion implements InsertionStrategy {
 		ADDRESS = connectionData[2];
 		USER = connectionData[0];
 		PASS = connectionData[1];
+		DATABASE = connectionData[2];
 		// System.out.println("SERVER " + maxNodes + " " + address);
 	}
 

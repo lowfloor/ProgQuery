@@ -15,7 +15,7 @@ import es.uniovi.reflection.progquery.node_wrappers.NodeWrapper;
 import es.uniovi.reflection.progquery.utils.dataTransferClasses.Pair;
 
 public class PackageInfo {
-	private static NodeWrapper currentProgram;
+	public static NodeWrapper currentProgram;
 
 	public static void createCurrentProgram(String id) {
 		System.out.println("[createCurrentProgram] id:" + id);

@@ -53,8 +53,6 @@ public class GetStructuresAfterAnalyze implements TaskListener {
 		DatabaseFachade.CURRENT_INSERTION_STRATEGY.startAnalysis();
 		System.out.println("Se crea node program");
 		PackageInfo.createCurrentProgram(programID);
-		if(InfoToInsert.INFO_TO_INSERT.hasNodeWithLabel(NodeTypes.PROGRAM))
-			System.out.println("Pues seh");
 	}
 
 	@Override
