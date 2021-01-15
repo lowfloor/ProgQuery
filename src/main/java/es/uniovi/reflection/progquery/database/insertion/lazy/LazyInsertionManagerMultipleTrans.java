@@ -11,10 +11,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Config;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.GraphDatabase;
 import org.neo4j.driver.Result;
 import org.neo4j.driver.Session;
+import org.neo4j.driver.SessionConfig;
 import org.neo4j.driver.Transaction;
 import org.neo4j.driver.TransactionWork;
 
@@ -26,7 +28,7 @@ public class LazyInsertionManagerMultipleTrans {
 	private static final int REPETITIONS = 1;
 
 	public static void insertIntoNeo4jServerByDriver(InfoToInsert info, final String SERVER_ADDRESS, final String USER,
-			final String PASS, final int MAX_NODES_PER_TRANSACTION) {
+			final String PASS, String DATABASE, final int MAX_NODES_PER_TRANSACTION) {
 
 		if(info.hasNodeWithLabel(NodeTypes.PROGRAM))
 			System.out.println("Existe un nodo de tipo program");
@@ -35,7 +37,7 @@ public class LazyInsertionManagerMultipleTrans {
 		
 		
 		try (final Driver driver = GraphDatabase.driver(SERVER_ADDRESS, AuthTokens.basic(USER, PASS));
-				Session session = driver.session()) {
+				Session session = driver.session( DATABASE != null? SessionConfig.forDatabase(DATABASE) : SessionConfig.defaultConfig())) {
 			
 			info.nodeSet.stream()
 			.forEach((item) -> {

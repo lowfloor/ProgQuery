@@ -28,7 +28,7 @@ public class Neo4jDriverLazyWrapperInsertion implements InsertionStrategy {
 		ADDRESS = connectionData[2];
 		USER = connectionData[0];
 		PASS = connectionData[1];
-		DATABASE = connectionData[2];
+		DATABASE = connectionData.length >= 3 ? connectionData[2] : null;
 		// System.out.println("SERVER " + maxNodes + " " + address);
 	}
 
@@ -55,7 +55,7 @@ public class Neo4jDriverLazyWrapperInsertion implements InsertionStrategy {
 	@Override
 	public void endAnalysis() {
 		LazyInsertionManagerMultipleTrans.insertIntoNeo4jServerByDriver(InfoToInsert.INFO_TO_INSERT, ADDRESS, USER,
-				PASS, MAX_NODES_PER_TRANSACTION);
+				PASS, DATABASE, MAX_NODES_PER_TRANSACTION);
 
 	}
 
