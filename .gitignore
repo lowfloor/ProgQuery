@@ -33,3 +33,15 @@ ProgQuery/javac.*.args
 ProgQuery/.settings/
 
 ProgQuery/target/
+
+.metadata/
+
+.settings/
+
+bin/
+
+target/
+
+.classpath
+
+.project
