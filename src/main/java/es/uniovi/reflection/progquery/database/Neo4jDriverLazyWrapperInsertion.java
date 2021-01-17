@@ -28,7 +28,7 @@ public class Neo4jDriverLazyWrapperInsertion implements InsertionStrategy {
 		ADDRESS = connectionData[2];
 		USER = connectionData[0];
 		PASS = connectionData[1];
-		DATABASE = connectionData.length >= 3 ? connectionData[2] : null;
+		DATABASE = connectionData.length >= 4 ? connectionData[3] : null;
 		// System.out.println("SERVER " + maxNodes + " " + address);
 	}
 
