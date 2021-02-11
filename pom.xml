@@ -54,6 +54,8 @@
 			</resource>
 		</resources>
 		<plugins>
+		
+		<!--  
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.3.0</version>
@@ -84,6 +86,7 @@
 					</execution>
 				</executions>
 			</plugin>
+-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
