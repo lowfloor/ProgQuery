@@ -60,8 +60,8 @@ public class JavacInfo {
 		// currentJavacInfo.sourcePositions.getStartPosition(currentJavacInfo.currCompilationUnit,
 		// tree);
 		// System.out.println();
-		return new Object[] { "lineNumber", lineMap.getLineNumber(position), "column",
-				lineMap.getColumnNumber(position), "position", position
+		return new Object[] { "lineNumber", lineNumber(lineMap, position), "column",
+				columnNumber(lineMap, position), "position", position
 				// "endColumn"
 
 				// , lineMap.get(arg0, arg1)(
@@ -69,6 +69,22 @@ public class JavacInfo {
 				// tree))
 		};
 
+	}
+	
+	private static long lineNumber(LineMap lineMap, long position) {
+		try {
+			return lineMap.getLineNumber(position);
+		} catch (Exception e) {
+			return -1;
+		}
+	}
+	
+	private static long columnNumber(LineMap lineMap, long position) {
+		try {
+			return lineMap.getColumnNumber(position);
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 
 	public static long getSize(Tree tree) {
