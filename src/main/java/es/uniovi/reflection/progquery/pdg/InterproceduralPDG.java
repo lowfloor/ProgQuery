@@ -46,11 +46,11 @@ public class InterproceduralPDG {
 		methodDecsAnalyzed.add(methodDec);
 		// Para analizar
 		if (methodDecToCalls.containsKey(methodDec))
-			// Aquí pueden llegar, sin estar en el map, el constructor por
+			// Aquï¿½ pueden llegar, sin estar en el map, el constructor por
 			// defecto, que no llama a
-			// nadie, sólo a super, se puede omitir, y cualquier método no
+			// nadie, sï¿½lo a super, se puede omitir, y cualquier mï¿½todo no
 			// declarado en el proyecto hashCode lenght println...., de los que
-			// no podemos sacar esa información
+			// no podemos sacar esa informaciï¿½n
 
 			for (RelationshipWrapper callRel : methodDecToCalls.get(methodDec)) {
 
@@ -79,10 +79,13 @@ public class InterproceduralPDG {
 							// System.out.println("THERE IS STAT REL !!");
 							Pair<Integer, Boolean> pair = Pair.create(
 									paramEntry.getKey().hasLabel(NodeTypes.THIS_REF) ? 0
-											: (Integer) paramEntry.getKey()
+											: paramEntry.getKey()
 													.getSingleRelationship(EdgeDirection.INCOMING,
-															RelationTypes.CALLABLE_HAS_PARAMETER)
-													.getProperty("paramIndex"),
+															RelationTypes.CALLABLE_HAS_PARAMETER) != null ? (Integer) paramEntry.getKey()
+																	.getSingleRelationship(EdgeDirection.INCOMING,
+																			RelationTypes.CALLABLE_HAS_PARAMETER)
+																	.getProperty("paramIndex") : 0
+													,
 
 									// !(invocationReferringDec.getType().name().contains("MAY")
 									// ||
@@ -135,8 +138,8 @@ public class InterproceduralPDG {
 
 	/*
 	 * En lugar de no retornar nada, hay que retornar las relaciones... s-r->e
-	 * Luego para todos los MAY_REFER_TO si hay una relación s-r->e para todas
-	 * entonces el tipo es r si sólo hay en algunas s-r->e , el tipo es MAY_
+	 * Luego para todos los MAY_REFER_TO si hay una relaciï¿½n s-r->e para todas
+	 * entonces el tipo es r si sï¿½lo hay en algunas s-r->e , el tipo es MAY_
 	 */
 	private void createRelationsIfNeededForArgumentNumber(int argNumber, RelationshipWrapper callRel, boolean must,
 			MethodInfo methodInfo) {
@@ -194,7 +197,7 @@ public class InterproceduralPDG {
 
 				}
 
-				// TODAVÍA NO
+				// TODAVï¿½A NO
 				// varMayOrMustBeModified.getFirst().createRelationshipTo(methodInfo.methodNodeWrapper,
 				// isMay || !(Boolean) callRel.getProperty("mustBeExecuted")
 				// ? PDGRelationTypes.STATE_MAY_BE_MODIFIED :
@@ -223,7 +226,7 @@ public class InterproceduralPDG {
 		Map<Pair<NodeWrapper, Pair<NodeWrapper, Boolean>>, PDGRelationTypes> relMapForMethod = getRelMapForMethod(
 				methodInfo);
 		PDGProcessing.addNewPDGRelationFromParamToMethod(isMust, relMapForMethod.get(decToInvKey), (newRel) -> {
-			// SI TIENE OTRA REL SE DEBE BORRAR, ÚNICO CASO
+			// SI TIENE OTRA REL SE DEBE BORRAR, ï¿½NICO CASO
 			// STATE_MAY_MOD y new STATE_MOD
 			relMapForMethod.put(decToInvKey, newRel);
 		});
@@ -232,7 +235,7 @@ public class InterproceduralPDG {
 	private void addNewPDGRelFromParamToMethod(boolean isMust, Map<NodeWrapper, PDGRelationTypes> paramRelsOnMethod,
 			NodeWrapper dec) {
 		PDGProcessing.addNewPDGRelationFromParamToMethod(isMust, paramRelsOnMethod.get(dec), (newRel) -> {
-			// SI TIENE OTRA REL SE DEBE BORRAR, ÚNICO CASO
+			// SI TIENE OTRA REL SE DEBE BORRAR, ï¿½NICO CASO
 			// STATE_MAY_MOD y new STATE_MOD
 			paramRelsOnMethod.put(dec, newRel);
 		});
